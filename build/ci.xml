@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project basedir="." default="test" name="CFML CI">
+  <property name="work.dir" location="work" />
+  <property name="web.root" location="../"/>
+  <property name="test.project" value="coldbox" />
+  <property name="source" value="local" />
+
+  <loadproperties srcFile="./ci.properties"/>
+
+  <fail unless="platform" message="Platform is not set" />
+  <fail unless="${platform}.${source}.url">Unkown platform ${platform} for source ${source}.
+
+Valid values are:
+ railo40
+ railo41
+ railo41-osx
+ railo42
+ lucee452
+ lucee5_beta
+ acf10-linux32
+ acf10-linux64
+ acf902-linux64</fail>
+
+  <macrodef name="propertycopy">
+    <attribute name="name"/>
+    <attribute name="from"/>
+    <sequential>
+      <property name="@{name}" value="${@{from}}"/>
+    </sequential>
+  </macrodef>
+
+  <propertycopy name="platform.url" from="${platform}.${source}.url" />
+  <propertycopy name="platform.helper" from="${platform}.helper" />
+
+  <target name="install-ci-deps">
+    <exec executable="/bin/bash" failonerror="true">
+      <env key="WORK_DIR" value="${work.dir}" />
+      <env key="BUILD_DIR" value="${web.root}" />
+      <env key="PLATFORM_URL" value="${platform.url}" />
+      <env key="SERVER_PORT" value="${server.port}" />
+      <env key="STOP_PORT" value="${stop.port}" />
+      <arg line="ci-scripts/ci-helper-${platform.helper}.sh install ${test.project}"/>
+    </exec>
+  </target>
+
+  <target name="start-server">
+    <exec executable="/bin/bash" spawn="false" failonerror="true">
+      <env key="WORK_DIR" value="${work.dir}" />
+      <env key="BUILD_DIR" value="${web.root}" />
+      <env key="SERVER_PORT" value="${server.port}" />
+      <arg line="ci-scripts/ci-helper-${platform.helper}.sh start"/>
+    </exec>
+  </target>
+
+  <target name="stop-server">
+    <exec executable="/bin/bash" spawn="false" failonerror="true">
+      <env key="WORK_DIR" value="${work.dir}" />
+      <env key="BUILD_DIR" value="${web.root}" />
+      <env key="SERVER_PORT" value="${server.port}" />
+      <arg line="ci-scripts/ci-helper-${platform.helper}.sh stop"/>
+    </exec>
+  </target>
+</project>
