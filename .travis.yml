@@ -3,6 +3,7 @@ sudo: false
 env:
   matrix:
     - PLATFORM=lucee452
+    - PLATFORM=acf10-linux64
 before_install:
 - mkdir /tmp/bin
 - export PATH=$PATH:/tmp/bin
