@@ -1,7 +1,7 @@
 ﻿<!-----------------------------------------------------------------------
 ********************************************************************************
 Copyright Since 2005 ColdBox Framework by Luis Majano and Ortus Solutions, Corp
-www.coldbox.org | www.luismajano.com | www.ortussolutions.com
+www.ortussolutions.com
 ********************************************************************************
 Author 	    :	Luis Majano
 Description :
@@ -30,7 +30,7 @@ Or look in the /coldbox/system/cache/store/sql/*.sql for you sql script for your
 
 	<!--- init --->
 	<cffunction name="init" access="public" output="false" returntype="JDBCStore" hint="Constructor">
-		<cfargument name="cacheProvider" type="any" required="true" hint="The associated cache provider as coldbox.system.cache.ICacheProvider" colddoc:generic="coldbox.system.cache.ICacheProvider"/>
+		<cfargument name="cacheProvider" type="any" required="true" hint="The associated cache provider as coldbox.system.cache.ICacheProvider" doc_generic="coldbox.system.cache.ICacheProvider"/>
 		<cfscript>
 			// Store Fields
 			var fields = "objectKey,hits,timeout,lastAccessTimeout,created,lastAccessed,isExpired,isSimple";

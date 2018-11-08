@@ -1,7 +1,7 @@
 ﻿<!-----------------------------------------------------------------------
 ********************************************************************************
 Copyright Since 2005 ColdBox Framework by Luis Majano and Ortus Solutions, Corp
-www.coldbox.org | www.luismajano.com | www.ortussolutions.com
+www.ortussolutions.com
 ********************************************************************************
 
 Author     :	Luis Majano
@@ -13,7 +13,7 @@ Description :
 <!------------------------------------------- CONSTRUCTOR ------------------------------------------->
 	
 	<cffunction name="init" access="public" output="false" returntype="ElementCleaner" hint="Constructor">
-		<cfargument name="cacheProvider" type="any" required="true" hint="The associated cache manager/provider of type: coldbox.system.cache.ICacheProvider" colddoc:generic="coldbox.system.cache.ICacheProvider"/>
+		<cfargument name="cacheProvider" type="any" required="true" hint="The associated cache manager/provider of type: coldbox.system.cache.ICacheProvider" doc_generic="coldbox.system.cache.ICacheProvider"/>
 		<cfscript>
 			variables.cacheProvider = arguments.cacheProvider;
 			return this;
@@ -23,7 +23,7 @@ Description :
 <!------------------------------------------- PUBLIC ------------------------------------------->
 	
 	<!--- Get Associated Cache --->
-	<cffunction name="getAssociatedCache" access="public" output="false" returntype="any" hint="Get the associated cache provider/manager of type: coldbox.system.cache.ICacheProvider" colddoc:generic="coldbox.system.cache.ICacheProvider">
+	<cffunction name="getAssociatedCache" access="public" output="false" returntype="any" hint="Get the associated cache provider/manager of type: coldbox.system.cache.ICacheProvider" doc_generic="coldbox.system.cache.ICacheProvider">
 		<cfreturn cacheProvider>
 	</cffunction>
 	
@@ -69,15 +69,15 @@ Description :
 		<cfargument name="queryString" 	required="false" default="" hint="If passed in, it will create a unique hash out of it. For purging purposes"/>
 		<cfscript>
 			//.*- = the cache suffix and appendages for regex to match
-			var cacheKey = getAssociatedCache().getEventCacheKeyPrefix() & replace(arguments.eventsnippet,".","\.","all") & ".*-.*";
+			var cacheKey = getAssociatedCache().getEventCacheKeyPrefix() & replace( arguments.eventsnippet, ".", "\.", "all" ) & ".*-.*";
 														  
 			//Check if we are purging with query string
-			if( len(arguments.queryString) neq 0 ){
-				cacheKey = cacheKey & "-" & getAssociatedCache().getEventURLFacade().buildHash(arguments.queryString);
+			if( len( arguments.queryString ) neq 0 ){
+				cacheKey &= "-" & getAssociatedCache().getEventURLFacade().buildHash( arguments.queryString );
 			}
-			
+
 			// Clear All Events by Criteria
-			clearByKeySnippet(keySnippet=cacheKey,regex=true);
+			clearByKeySnippet( keySnippet=cacheKey, regex=true );
 		</cfscript>
 	</cffunction>
 	

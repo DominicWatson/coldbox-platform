@@ -1,15 +1,11 @@
-﻿<!-----------------------------------------------------------------------
-********************************************************************************
-Copyright Since 2005 ColdBox Framework by Luis Majano and Ortus Solutions, Corp
-www.coldbox.org | www.luismajano.com | www.ortussolutions.com
-********************************************************************************
-Author 	 :	Luis Majano
-Description :
-	The default ColdBox WireBox Injector configuration object that is used when the
-	WireBox injector is created
------------------------------------------------------------------------>
-<cfcomponent output="false" hint="The default WireBox Injector configuration object" extends="coldbox.system.ioc.config.Binder">
-<cfscript>
+﻿/**
+* Copyright Since 2005 ColdBox Framework by Luis Majano and Ortus Solutions, Corp
+* www.ortussolutions.com
+* ---
+* The default ColdBox WireBox Injector configuration object that is used when the
+* WireBox injector is created
+**/
+component extends="coldbox.system.ioc.config.Binder"{
 	
 	/**
 	* Configure WireBox, that's it!
@@ -28,6 +24,10 @@ Description :
 				// cacheFactory = ""  A reference to an already instantiated CacheBox CacheFactory
 				// classNamespace = "" A class path namespace to use to create CacheBox: Default=coldbox.system.cache or wirebox.system.cache
 			},			
+			
+			// Name of a CacheBox cache to store metadata in to speed up start time.
+			// Since metadata is already stored in memory, this is only useful for a disk, etc cache that persists across restarts.
+			metadataCache='',
 			
 			// Scope registration, automatically register a wirebox injector instance on any CF scope
 			// By default it registeres itself on application scope
@@ -62,5 +62,5 @@ Description :
 			]			
 		};
 	}	
-</cfscript>
-</cfcomponent>
+
+}

@@ -1,7 +1,7 @@
 ﻿<!-----------------------------------------------------------------------
 ********************************************************************************
 Copyright Since 2005 ColdBox Framework by Luis Majano and Ortus Solutions, Corp
-www.coldbox.org | www.luismajano.com | www.ortussolutions.com
+www.ortussolutions.com
 ********************************************************************************
 
 Author     :	Luis Majano
@@ -71,7 +71,7 @@ Description :
     </cffunction>
 	
 	<!--- getKeys --->
-    <cffunction name="getKeys" output="false" access="public" returntype="any" hint="Returns an array of the keys stored in the index" colddoc:generic="array">
+    <cffunction name="getKeys" output="false" access="public" returntype="any" hint="Returns an array of the keys stored in the index" doc_generic="array">
     	<cfreturn structKeyArray( getPoolMetadata() )>
     </cffunction>
 
